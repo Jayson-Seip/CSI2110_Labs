@@ -11,7 +11,7 @@ public class HeapPriorityQueue<K extends Comparable,V> implements PriorityQueue<
      * Default constructor
      */
     public HeapPriorityQueue() {
-        this.storage = new Entry[20];
+        this.storage = new Entry[26];
         this.tail = 0;
     }
 
