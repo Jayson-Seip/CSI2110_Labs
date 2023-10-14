@@ -115,7 +115,7 @@ public class HeapPriorityQueue<K extends Comparable,V> implements PriorityQueue<
             while(location>0){
                 int parent = parent(location);
                 // Checks if current node is larger than it's parent and if it is the program breaks out of the loop
-                if(storage[location].getKey().compareTo(storage[parent].getKey())>=0){
+                if(storage[location].getKey().compareTo(storage[parent].getKey())<=0){
                     break;
                 }
                 swap(location,parent);
@@ -136,7 +136,7 @@ public class HeapPriorityQueue<K extends Comparable,V> implements PriorityQueue<
                 if(2*location+2<size()) {
                     int rightChild = 2 * location + 2;
                     // Checks which child node is smaller
-                    if (storage[leftChild].getKey().compareTo(storage[rightChild].getKey()) > 0) {
+                    if (storage[leftChild].getKey().compareTo(storage[rightChild].getKey()) < 0) {
                         smallestChild = rightChild;
                     }
                 }
@@ -144,7 +144,7 @@ public class HeapPriorityQueue<K extends Comparable,V> implements PriorityQueue<
                 Checks if the smallest child is bigger than the parent. If the child is bigger than the parent
                 the program breaks out of the loop since the min heap condition is satisfied
                  */
-                if(storage[smallestChild].getKey().compareTo(storage[location].getKey())>=0){
+                if(storage[smallestChild].getKey().compareTo(storage[location].getKey())<=0){
                     break;
                 }
                 // Swaps nodes if smaller child is smaller than the parent node
