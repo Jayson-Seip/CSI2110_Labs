@@ -243,7 +243,7 @@ public class LinkedBinarySearchTree<E extends Comparable> implements Iterable<E>
         
         public boolean hasNext(){
             return next != null;
-            //Implement Here
+
         }
         
         public E next(){
@@ -253,7 +253,6 @@ public class LinkedBinarySearchTree<E extends Comparable> implements Iterable<E>
                 while(next.left != null){
                     next = next.left;
                 }
-
             }
             else{
                 while(true){
