@@ -191,7 +191,7 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
     if(isExternal(node)){
       return 0;
     }
-    return Math.max(heightRecurse(left(node)),heightRecurse(right(node)))+1;
+    return 1 + Math.max(heightRecurse(left(node)),heightRecurse(right(node)));
   }
 
   /** Utility used when inserting a new entry at a leaf of the tree */
