@@ -151,6 +151,8 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
         return x;                                 // x is new subtree root
       }
     }
+
+
   } //----------- end of nested BalanceableBinaryTree class -----------
 
   /** Representation of the underlying tree structure. */
@@ -178,6 +180,18 @@ public class TreeMap<K,V> extends AbstractSortedMap<K,V> {
   @Override
   public int size() {
     return (tree.size() - 1) / 2;        // only internal nodes have entries
+  }
+
+  public int height(){
+    return heightRecurse(root());
+  }
+
+
+  public int heightRecurse(Position<Entry<K,V>> node){
+    if(isExternal(node)){
+      return 0;
+    }
+    return Math.max(heightRecurse(left(node)),heightRecurse(right(node)))+1;
   }
 
   /** Utility used when inserting a new entry at a leaf of the tree */

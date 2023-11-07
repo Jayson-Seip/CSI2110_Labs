@@ -117,4 +117,5 @@ public interface Tree<E> extends Iterable<E> {
    * @return iterable collection of the tree's positions
    */
   Iterable<Position<E>> positions();
+
 }

@@ -68,14 +68,17 @@ public class Verify {
    * Print statistics about the trees generated
    */
   public void printStatistics() {
-    System.out.printf( "%10d %10d %10.3f %10d %10d %10.3f %10.3f\n", 
-		       d_minBST,
-		       d_maxBST, 
-		       ((double)d_totalHeightBST)/d_noTrees,
-		       d_minAVL,
-		       d_maxAVL, 
-		       ((double)d_totalHeightAVL)/d_noTrees,
-		       Math.log(d_noTrees));
+    System.out.printf( "%10d %10d %10.3f %10d %10d %10.3f %10.3f\n",
+            d_minAVL,
+            d_maxAVL,
+            ((double)d_totalHeightAVL)/d_noTrees,
+
+            d_minBST,
+            d_maxBST,
+            ((double)d_totalHeightBST)/d_noTrees,
+
+
+            Math.log(d_noTrees));
   }
 
   /**
@@ -85,27 +88,32 @@ public class Verify {
     // Initialize minimum and maximum counters
     initCounters( _noNodes, _nTrees );
     // generate _nTrees and update statistics
-    for(int i=0; i<_nTrees; ++i) { 
+    for(int i=0; i<_nTrees; ++i) {
       // Create AVL and BST trees using AVLTreeMap and TreeMap respectively.
+      AVLTreeMap<Integer,Integer> treeAVL = new AVLTreeMap<>();
+      TreeMap<Integer,Integer> treeBST = new TreeMap<>();
 
 
       // loop to insert _noNodes keys into tree
       int count = 0;
       do {
-	// create random key between 0 and the maximum integer
-	int randKey=(int) (Math.random()*Integer.MAX_VALUE);
-	// make sure the generated random key is not used before 
-	if ( true ) { // Needs change !!!
-	  // insert into AVL
+        // create random key between 0 and the maximum integer
+        int randKey=(int) (Math.random()*Integer.MAX_VALUE);
+        // make sure the generated random key is not used before
 
-	  // insert into BST
+        if (treeAVL.get(randKey) == null ) { // Needs change !!!
 
-	  // next key
-	  ++count;
-	}
+          // insert into AVL
+          treeAVL.put(randKey, null);
+          // insert into BST
+          treeBST.put(randKey,null);
+
+          // next key
+          ++count;
+        }
       } while ( count < _noNodes );
-      // updateCounters( height( treeAVL ), height( treeBST));
-      updateCounters( 0, 0); // Needs change !!!
+      updateCounters( height( treeAVL ), height( treeBST));
+      //updateCounters( 0, 0); // Needs change !!!
     }
     return;
   }
@@ -115,12 +123,12 @@ public class Verify {
    * Adapt the Euler tour to calculate height (see Lab 4)
    * Note: BST and AVL trees are binary trees
    */
-  public <T> int height( BinaryTree<T> bTree ) {
-    return 0; // change to return the height of bTree
+  public <T> int height( TreeMap<T,T> bTree ) {
+    return bTree.height(); // change to return the height of bTree
   }
 
   /**
-   * Entry point: compare height statistics 
+   * Entry point: compare height statistics
    * of different size BST and AVL trees
    */
   public static void main(String[] _argv) {
@@ -131,9 +139,9 @@ public class Verify {
     if ( _argv.length > 0 ) numSteps = Integer.valueOf( _argv[0] );
 
     System.out.println( "Height Comparison: with and without AVL balancing" );
-    System.out.printf( "%6s %10s %10s %10s %10s %10s %10s %10s\n", 
-		       "N", "min", "max", "avg", 
-		       "min", "max", "avg", "log(N)");
+    System.out.printf( "%6s %10s %10s %10s %10s %10s %10s %10s\n",
+            "N", "min", "max", "avg",
+            "min", "max", "avg", "log(N)");
 
     int numNodes = numNodesStart;
     for ( int i=0; i<numSteps; ++i ) {
@@ -148,3 +156,4 @@ public class Verify {
   }
 
 }
+
