@@ -35,7 +35,7 @@ import net.datastructures.Map;
 
 
 public class SimpleGraph {
-  Graph<String,String> sGraph;  
+  Graph<String,String> sGraph;
   
 
   /** 
@@ -106,6 +106,7 @@ public class SimpleGraph {
 
   Hashtable<String,Boolean> visited;
 
+
   public void printDFS( String vert  ) {
     Vertex<String> vt = getVertex( vert );
     visited = new Hashtable<>();
@@ -115,10 +116,21 @@ public class SimpleGraph {
 	
 	
   private void DFS(Graph<String,String> graph, Vertex<String> v ) {
-	  
+
     /***** please implement depth-first search here ************/
-	  
-    return;
+
+    // Base case element has been visited
+    if(visited.get(v.getElement()) != null){
+      return;
+    }
+    // If element has not been visited
+    visited.put(v.getElement(), Boolean.TRUE);
+    startVisit(v);
+    for (Edge<String> e: graph.outgoingEdges(v)) {
+      Vertex<String> vertex = graph.opposite(v,e);
+      DFS(graph,vertex);
+    }
+    finishVisit(v);
   }
   
   private void startVisit( Vertex<String> v ) {
@@ -139,6 +151,7 @@ public class SimpleGraph {
     for( Vertex<String> vs : sGraph.vertices() ) {
       System.out.println( vs.getElement() );
     }
+    System.out.println("Edges");
     for( Edge<String> es : sGraph.edges() ) {
       System.out.println( es.getElement() );
     }
