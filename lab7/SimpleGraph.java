@@ -126,9 +126,10 @@ public class SimpleGraph {
     // If element has not been visited
     visited.put(v.getElement(), Boolean.TRUE);
     startVisit(v);
+    //Goes through all the outgoing edges
     for (Edge<String> e: graph.outgoingEdges(v)) {
       Vertex<String> vertex = graph.opposite(v,e);
-      DFS(graph,vertex);
+      DFS(graph,vertex); // Recursive call
     }
     finishVisit(v);
   }
@@ -184,6 +185,7 @@ public class SimpleGraph {
       // Ask for vertex to start
       System.out.println( "Start Vertex for DFS:");
       sGraph.printDFS(readVertex());
+
     }catch ( Exception except ) {
       System.err.println(except);
       except.printStackTrace();
