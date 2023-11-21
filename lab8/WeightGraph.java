@@ -133,14 +133,15 @@ public class WeightGraph {
 	void printAllShortestDistances(String vert) throws Exception {
         Vertex<String> vSource = getVertex( vert );
 
-        // Your code here!
+		GraphAlgorithms ga = new GraphAlgorithms();
 
-        // Find shortest path
+		Map<Vertex<String>, Integer> ShortestPath = ga.shortestPathLengths(sGraph, vSource);
 
-        // Print shortest path to named cities
-
-        return;
+		for (Vertex<String> vDestination : sGraph.vertices()) {
+			System.out.println(vSource.getElement() + " to " + vDestination.getElement() + " = " + ShortestPath.get(vDestination));
+		}
 	}
+
 	
 	
 
