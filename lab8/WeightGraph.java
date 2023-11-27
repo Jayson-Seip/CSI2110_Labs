@@ -139,7 +139,9 @@ public class WeightGraph {
 
 		for (Vertex<String> vDestination : sGraph.vertices()) {
 			System.out.println(vSource.getElement() + " to " + vDestination.getElement() + " = " + ShortestPath.get(vDestination));
+
 		}
+		sGraph.removeVertex(vSource);
 	}
 
 	
@@ -169,6 +171,7 @@ public class WeightGraph {
 			// Ask for vertex to start
 			System.out.println("Source Vertex for Shortest Path:");
 			sGraph.printAllShortestDistances(readVertex());
+
 		} catch (Exception except) {
 			System.err.println(except);
 			except.printStackTrace();

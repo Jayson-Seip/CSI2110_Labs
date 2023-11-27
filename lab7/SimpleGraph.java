@@ -72,15 +72,18 @@ public class SimpleGraph {
       Vertex<String> sv = vertices.get( source );
       if ( sv == null ) {
 	// Source vertex not in graph -- insert
-	sv = sGraph.insertVertex(source); 
+	sv = sGraph.insertVertex(source);
+    System.out.print("S: "+sv.getElement()+" ");
 	vertices.put( source, sv );
-      } 
+      }
       Vertex<String> dv = vertices.get( dest );
       if ( dv == null ) {
 	// Destination vertex not in graph -- insert
-	dv = sGraph.insertVertex(dest); 
+	dv = sGraph.insertVertex(dest);
+    System.out.println("D: "+dv.getElement());
 	vertices.put( dest, dv );
       }
+
       // check if edge is already in graph
       if ( sGraph.getEdge( sv, dv )==null) {
 	// edge not in graph -- add 
@@ -156,7 +159,6 @@ public class SimpleGraph {
     for( Edge<String> es : sGraph.edges() ) {
       System.out.println( es.getElement() );
     }
-    return;
   }
 
 
@@ -182,6 +184,7 @@ public class SimpleGraph {
     try {
       SimpleGraph sGraph = new SimpleGraph( argv[0] );
       sGraph.print();
+
       // Ask for vertex to start
       System.out.println( "Start Vertex for DFS:");
       sGraph.printDFS(readVertex());
