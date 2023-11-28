@@ -15,7 +15,7 @@
 // ==========================================================================
 public class DoubleHashStep implements SteppingFunction{
     public long step(int i, long data, int size){
-        return 1;
+        return (long)i*(data%size);
     }
     public String getType(){return "Double Hashing";}
 }

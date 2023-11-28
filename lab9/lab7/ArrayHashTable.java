@@ -42,9 +42,22 @@ public class ArrayHashTable<K,V> implements HashTable<K,V> {
      * @param key
      * @return 
      */
-    public V get(K key){ 
-		
-		/*********** complete this method; now returning a dummy null ***********/
+    public V get(K key){
+        /*********** complete this method; now returning a dummy null ***********/
+		// Checks if key is in the list
+        if(this.contains(key)){
+            long hash1 = func1.Hash(key);
+            long hash2 = func2==null ? 1: func2.Hash(key);
+            for(int i=0;i<size;i++){
+                int hash = (int) ((hash1 + step.step(i,hash2,size))%size);
+
+                Entry<K,V> entry = table.get(hash);
+                if(entry.key.equals(key)){
+                    return entry.value;
+                }
+            }
+        }
+
 		
         return null;
     }
@@ -103,9 +116,27 @@ public class ArrayHashTable<K,V> implements HashTable<K,V> {
      * @return 
      */
     public boolean put(K key, V value){
-		
 		/*********** complete this method; now returning a dummy false ***********/
-		
+        long hash1 = func1.Hash(key);
+        long hash2 = (func2==null)? 1 : func2.Hash(key);
+        for(int i=0;i<size;i++){
+            int hash = Math.floorMod((hash1+step.step(i,hash2,size)),size);
+            Entry<K,V> entry = table.get(hash);
+
+            if(this.contains(key)){
+                if(entry.key.equals(key)){
+                    table.set(hash,new Entry<>(key,value));
+                    return true;
+                }
+            }
+            else if(entry==null || entry.key==null){
+                table.set(hash,new Entry<>(key,value));
+
+                elements++;
+                return true;
+            }
+            totalNumProbes++;
+        }
         return false;     
     }
     

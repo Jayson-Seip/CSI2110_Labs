@@ -73,7 +73,7 @@ public class HashingTest {
         // the current working directory
         String cwd = currentRelativePath.toAbsolutePath().toString();
         HashingTest test = new HashingTest();
-        ArrayList<String> words = test.readFile(cwd + "\\TheOdysseyBook1.txt");
+        ArrayList<String> words = test.readFile("C:\\Users\\jayse\\Desktop\\UOttawa\\CSI2110-D00\\CSI2110_Labs\\lab9\\lab7\\TheOdysseyBook1.txt");
         System.out.println("Table Size: "+size);
         HashTable<String,Integer> linear = new ArrayHashTable<String,Integer>(size, new StringHash(),null, new LinearProbeStep());
         HashTable<String,Integer> quadratic = new ArrayHashTable<String,Integer>(size, new StringHash(), null,new QuadraticProbeStep());
@@ -88,7 +88,7 @@ public class HashingTest {
 
         System.out.println();
         size = 4283;
-        words = test.readFile(cwd + "\\TheAeneidBook1-3.txt");
+        words = test.readFile("C:\\Users\\jayse\\Desktop\\UOttawa\\CSI2110-D00\\CSI2110_Labs\\lab9\\lab7\\TheAeneidBook1-3.txt");
         System.out.println("Table Size: "+size);
         linear = new ArrayHashTable<String,Integer>(size, new StringHash(),null, new LinearProbeStep());
         quadratic = new ArrayHashTable<String,Integer>(size, new StringHash(), null,new QuadraticProbeStep());

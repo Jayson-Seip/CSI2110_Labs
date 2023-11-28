@@ -29,21 +29,29 @@ public class ChainedHashTable<K,V> implements HashTable<K,V> {
         }
         func = h;
     }
-    
+
     /**
      * Returns the value associated with the key
      * returns null if the key is not present
      * @param key
-     * @return 
+     * @return
      */
     public V get(K key){
+        int hash = (int)(func.Hash(key)%size);
+        LinkedList<Entry<K,V>> list = table.get(hash);
+        if(list == null) return null;
+        for(Entry<K,V> e: list){
+            if(e.key.equals(key)){
+                return e.value;
+            }
+        }
         return null;
     }
-    
-     /**
+
+    /**
      * Removes the key value pair value from the hash table
      * @param key
-     * @return 
+     * @return
      */
     public void remove(K key){
         int hash = (int)(func.Hash(key)%size);
@@ -57,11 +65,11 @@ public class ChainedHashTable<K,V> implements HashTable<K,V> {
         }
         return ;
     }
-    
+
     /**
      * Returns true if the value is in the hash table
      * @param key
-     * @return 
+     * @return
      */
     public boolean contains(K key){
         int hash = (int)(func.Hash(key)%size);
@@ -74,23 +82,45 @@ public class ChainedHashTable<K,V> implements HashTable<K,V> {
         }
         return false;
     }
-    
+
     /**
-     * Puts the key value pair into the hash table, if the key is 
+     * Puts the key value pair into the hash table, if the key is
      * already in the value is updated
      * @param key
      * @param value
-     * @return 
+     * @return
      */
     public boolean put(K key, V value){
-        return false;        
+        int hash = (int)(func.Hash(key)%size);
+        LinkedList<Entry<K,V>> list = table.get(hash);
+        if(contains(key)){
+            for(Entry<K,V> e: list){
+                if(e.key.equals(key)){
+                    e.value = value;
+                    return true;
+                }
+            }
+        }
+        else{
+            elements++;
+            if(list == null){
+                list = new LinkedList<>();
+                list.add(new Entry(key,value));
+                table.set(hash, list);
+                return true;
+            }
+            collisions ++;
+            list.add(new Entry(key,value));
+            return true;
+        }
+        return false;
     }
-    
+
     public String extraInfo(){return "Total Collisions: "+collisions;}
     public double loadFactor(){return (double)elements/(double)size;}
     public String type(){return "Chaining";}
     public int elements(){return this.elements;}
-    
+
     private class Entry<K,V>{
         public K key;
         public V value;
